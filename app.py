@@ -24,7 +24,7 @@ configure_routes(app, bot)
 
 
 @bot.message_handler(commands=["start"])
-def start_message(message):
+async def start_message(message):
     mess = f"""
             Здравствуйте, {message.from_user.first_name}!   
 Я - бот для торговли на P2P. Чего бы Вы хотели сегодня?
@@ -34,7 +34,7 @@ def start_message(message):
     # button_action = types.KeyboardButton(button_text, callback_data="/get_rates")
     button_action = types.KeyboardButton(button_text)
     markup.add(button_action)
-    bot.send_message(
+    await bot.send_message(
         message.chat.id, mess, reply_markup=markup, parse_mode="html"
     )
     # await bot.send_message(message.chat.id, mess, parse_mode="html")
