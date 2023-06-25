@@ -24,7 +24,7 @@ configure_routes(app, bot)
 
 
 @bot.message_handler(commands=["start"])
-async def start_message(message):
+def start_message(message):
     mess = f"""
             Здравствуйте, {message.from_user.first_name}!   
 Я - бот для торговли на P2P. Чего бы Вы хотели сегодня?
