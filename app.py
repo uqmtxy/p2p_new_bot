@@ -51,5 +51,5 @@ async def get_all_rates(message):
             """
     await bot.send_message(message.chat.id, mess, parse_mode="html")
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
