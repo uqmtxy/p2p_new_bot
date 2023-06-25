@@ -19,12 +19,16 @@ URL = os.getenv("URL")
 bot = telebot.TeleBot(token=TOKEN, threaded=False)
 app = Flask(__name__)
 
+bot.remove_webhook()
+time.sleep(1)
+bot.set_webhook(url=os.getenv("URL"))
+
 configure_routes(app, bot)
 
 
 
 @bot.message_handler(commands=["start"])
-async def start_message(message):
+def start_message(message):
     mess = f"""
             Здравствуйте, {message.from_user.first_name}!   
 Я - бот для торговли на P2P. Чего бы Вы хотели сегодня?
@@ -34,14 +38,14 @@ async def start_message(message):
     # button_action = types.KeyboardButton(button_text, callback_data="/get_rates")
     button_action = types.KeyboardButton(button_text)
     markup.add(button_action)
-    await bot.send_message(
+    bot.send_message(
         message.chat.id, mess, reply_markup=markup, parse_mode="html"
     )
     # await bot.send_message(message.chat.id, mess, parse_mode="html")
 
 
 @bot.message_handler(commands=["get_rates"])
-async def get_all_rates(message):
+def get_all_rates(message):
     currency = modules.BinanceCurrency()
     mess = ""
     for this_currency_info in currency.get_default_params().values():
@@ -54,7 +58,7 @@ async def get_all_rates(message):
             mess += f"""
 {currency.get_param_pay_types()[0]} $USD = {currency.compute_rates()} {currency.get_param_fiat()}
             """
-    await bot.send_message(message.chat.id, mess, parse_mode="html")
+    bot.send_message(message.chat.id, mess, parse_mode="html")
 
 
 # if __name__ == "__main__":
