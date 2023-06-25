@@ -3,13 +3,11 @@ from modules import modules
 
 
 def test_index():
-    app = Flask(__name__, template_folder="../templates")
+    app = Flask(__name__)
 
     @app.route("/")
     def index():
-        hello = modules.hello()
-        content = modules.content()
-        return render_template("index.html", hello=hello, content=content)
+        return "I'm alive"
 
     app.testing = True
     client = app.test_client()

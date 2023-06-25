@@ -11,10 +11,7 @@ def configure_routes(app, bot):
         bot.remove_webhook()
         time.sleep(1)
         bot.set_webhook(url=os.getenv("URL"))
-
-        hello = modules.hello()
-        content = modules.content()
-        return render_template("index.html", hello=hello, content=content)
+        return "I'm alive"
 
     @app.route('/webhook', methods=['POST'])
     def webhook():
