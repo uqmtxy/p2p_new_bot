@@ -34,7 +34,7 @@ def start_message(message):
     # button_action = types.KeyboardButton(button_text, callback_data="/get_rates")
     button_action = types.KeyboardButton(button_text)
     markup.add(button_action)
-    await bot.send_message(
+    bot.send_message(
         message.chat.id, mess, reply_markup=markup, parse_mode="html"
     )
     # await bot.send_message(message.chat.id, mess, parse_mode="html")
