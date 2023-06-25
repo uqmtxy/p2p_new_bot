@@ -19,6 +19,10 @@ URL = os.getenv("URL")
 bot = telebot.TeleBot(token=TOKEN, threaded=False)
 app = Flask(__name__)
 
+bot.remove_webhook()
+time.sleep(1)
+bot.set_webhook(url=os.getenv("URL"))
+
 configure_routes(app, bot)
 
 
