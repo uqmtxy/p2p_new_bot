@@ -10,6 +10,9 @@ def configure_routes(app, bot):
     
     @app.route("/")
     def index():
+        bot.remove_webhook()
+        time.sleep(1)
+        bot.set_webhook(url=os.getenv("URL"))
         return "I'm alive"
     
     @app.route("/" + str(os.getenv("SECRET")), methods=["POST"])
